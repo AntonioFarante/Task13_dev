@@ -32,12 +32,9 @@ public class NoteController {
         return "add";
     }
 
-    @GetMapping(value = "/{id}/details")
+    @GetMapping(value = "/{id}")
     public String noteDetails(@PathVariable(value = "id") Long id,Model model) {
-
-        Optional<Note> notes = Optional.ofNullable(noteService.getById(id));
-        ArrayList<Note> res = new ArrayList<>();
-        notes.ifPresent(res::add);
+        Note res = noteService.getById(id);
         model.addAttribute("notes", res);
         return "details";
     }
@@ -56,17 +53,15 @@ public class NoteController {
         return result;
     }
 
-    @GetMapping(value = "/{id}/edit")
-    public String editNote(@PathVariable(name = "id") Long id, Model model){
-        Optional<Note> notes = Optional.ofNullable(noteService.getById(id));
-        ArrayList<Note> res = new ArrayList<>();
-        notes.ifPresent(res::add);
+    @GetMapping(value = "/edit")
+    public String editNoteTest(@RequestParam(name = "id") Long id, Model model){
+        Note res = noteService.getById(id);
         model.addAttribute("notes", res);
         return "/edit";
     }
 
-    @PostMapping(value = "/{id}/edit")
-    public String updateNote(@PathVariable(value = "id") Long id, @RequestParam String title,@RequestParam String content) throws Exception {
+    @PostMapping(value = "/edit")
+    public String updateNoteTest(@RequestParam(value = "id") Long id, @RequestParam String title,@RequestParam String content) throws Exception {
         Note note = noteService.getById(id);
         note.setTitle(title);
         note.setContent(content);
@@ -74,6 +69,7 @@ public class NoteController {
 
         return "redirect:/note/list";
     }
+
 
     @PostMapping(value = "/{id}/delete")
     public String deleteNote(@PathVariable(value = "id") Long id) {

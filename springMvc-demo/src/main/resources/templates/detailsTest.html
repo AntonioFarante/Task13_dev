@@ -19,7 +19,7 @@
                             <h5 th:text="${note.getTitle()}"></h5>
                             <a th:text="${note.getContent()}"></a>
                             <div class="d-flex justify-content-between align-items-center">
-                                <a th:href="'/note/edit' +'?id=' + ${note.id} " class="btn btn-warning">Редагувати</a>
+                                <a th:href="'/note/' + ${note.id} + '/edit'" class="btn btn-warning">Редагувати</a>
                                 <form th:action="'/note/' + ${note.id} + '/delete'" method="post">
                                     <button class="btn btn-warning" type="submit">Видалити</button>
                                 </form>
